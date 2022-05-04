@@ -1,0 +1,106 @@
+
+[node]
+# Autodetect which drivers are available on the current system, and add them to the Node.
+# Type: boolean
+# Default: true
+# Example: 
+detect-drivers = false
+
+
+# Drain and shutdown the Node after X sessions have been executed. Useful for environments like Kubernetes. A value higher than zero enables this feature.
+# Type: int
+# Default: 0
+# Example: 
+#drain-after-session-count = 1
+
+
+# List of configured drivers a Node supports. It is recommended to provide this type of configuration through a toml config file to improve readability. Command line example: --drivers-configuration display-name="Firefox Nightly" max-sessions=2 webdriver-path="/usr/local/bin/geckodriver" stereotype='{"browserName": "firefox", "browserVersion": "86", "moz:firefoxOptions": {"binary":"/Applications/Firefox Nightly.app/Contents/MacOS/firefox-bin"}}'
+# Type: list of strings
+# Example: 
+[[node.driver-configuration]]
+display-name = "Chrome"
+webdriver-executable = "drivers/chromedriver.exe"
+max-sessions = 2
+stereotype = "{\"browserName\": \"chrome\"}"
+
+
+# Mapping of fully qualified class name to a browser configuration that this matches against. --driver-factory org.openqa.selenium.example.LynxDriverFactory '{"browserName": "lynx"}'
+# Type: list of strings
+# Example: 
+#driver-factories = ["org.openqa.selenium.example.LynxDriverFactory '{"browserName": "lynx"}']
+
+
+# Drivers that should be checked. If specified, will skip autoconfiguration. Example: -I "firefox" -I "chrome"
+# Type: list of strings
+# Default: []
+# Example: 
+#driver-implementation = ["firefox", "chrome"]
+
+
+# Public URL of the Grid as a whole (typically the address of the Hub or the Router)
+# Type: string
+# Example: 
+#-url = "https://grid.example.com"
+
+
+# How often, in seconds, will the Node send heartbeat events to the Distributor to inform it that the Node is up.
+# Type: int
+# Default: 60
+# Example: 
+heartbeat-period = 60
+
+
+# The address of the Hub in a Hub-and-Node configuration. This can be a plain hostname or IP address (`hostname`), in which case the Hub will be assumed to be `http://hostname:4444`, the `--grid-url` will be the same, `--publish-events` will be `tcp://hostname:4442` and `--subscribe-events` will be `tcp://hostname:4443`. If `hostname` contains a port number, that will be used for `--grid-url` but the URIs for the event bus will remain the same. Any of these default values may be overridden but setting the correct flags. If the hostname has  a protocol (such as `https`) that will be used too.
+# Type: string
+# Example: 
+hub = "http://0.0.0.0:4444"
+
+
+# Full classname of non-default Node implementation. This is used to manage a session's lifecycle.
+# Type: string
+# Default: org.openqa.selenium.grid.node.local.LocalNodeFactory
+# Example: 
+
+
+
+
+# If VNC is available, sets the port where the local noVNC stream can be obtained
+# Type: int
+# Default: 7900
+# Example: 
+
+
+# The # of available processors is the recommended max sessions value (1 browser session per processor). Setting this flag to true allows the recommended max value to be overwritten. Session stability and reliability might suffer as the host could run out of resources.
+# Type: boolean
+# Default: false
+# Example: 
+override-max-sessions = false
+
+
+# How often, in seconds, the Node will try to register itself for the first time to the Distributor.
+# Type: int
+# Default: 10
+# Example: 
+register-cycle = 10
+
+
+# How long, in seconds, will the Node try to register to the Distributor for the first time. After this period is completed, the Node will not attempt to register again.
+# Type: int
+# Default: 120
+# Example: 
+register-period = 120
+
+
+# Let X be the session-timeout in seconds. The Node will automatically kill a session that has not had any activity in the last X seconds. This will release the slot for other tests.
+# Type: int
+# Default: 300
+# Example: 
+session-timeout = 300
+
+
+# Environment variable to check in order to determine if a vnc stream is available or not.
+# Type: string
+# Default: START_XVFB
+# Example: 
+
+

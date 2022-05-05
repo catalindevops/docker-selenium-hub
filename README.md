@@ -17,4 +17,6 @@ The grid will display 3 linux nodes:
 If you want to add your local windows computer as a node, execute:
 
     bin/selenium-node.bat
+    
+Don't forget to install java
 
